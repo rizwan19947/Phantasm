@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - bottom
+  - Wall
+  - Breakable
+  - Stomper
+  - turn
+  - Checkpoint
+  - battery
+  - bullet
+  - EnemyTop
+  - Enemy
+  - DmgRock
+  - snack
+  - UpdraftZone
+  - Switch
+  - spikes
+  - MoveableBlock
+  - movable
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - Jumpable
+  - Enemy Projectile
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2435925283
+    locked: 0
+  - name: Jumpable
+    uniqueID: 3350108893
+    locked: 0
