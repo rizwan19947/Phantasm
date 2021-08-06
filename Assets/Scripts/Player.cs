@@ -81,7 +81,6 @@ public class Player : MonoBehaviour
 
     bool canControl;
 
-
     public bool getIsStomping()
     {
         return isStomping;
@@ -107,36 +106,14 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (canControl) { 
+
+        if (canControl==true ) {
+
+            walkSpeed = 5f;
+
             //movement with keyboard
             dirX = Input.GetAxisRaw("Horizontal");
 
-            //////////////////////////////////////////////////////////////////////For joystick control. Do NOT delete///////////////////////////////////////////////////////////////////////////////
-            
-            /*if (joystick.Horizontal >= 0.5f)
-            {
-                dirX = 1;
-            }
-            else if (joystick.Horizontal <= -0.5f)
-            {
-                dirX = -1;
-            }
-            else
-            {
-                dirX = 0f;
-            }*/
-            
-
-
-
-
-       
-        
-
-
-
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             if (isGrounded == true)
             {
@@ -160,25 +137,6 @@ public class Player : MonoBehaviour
             {
                 ToggleStompMode(true);
             }
-            
-        
-
-            //stomping using mobile
-            
-            /*if (joystick.Vertical > -0.2f)
-            {
-                swipedDown = false;
-            }
-
-            if (joystick.Vertical <= -0.7f && canStomp)
-            {
-                if (!swipedDown)
-                {
-                    ToggleStompMode(true);
-                    swipedDown = true;
-                }
-            }*/
-            
         
 
 
@@ -203,8 +161,26 @@ public class Player : MonoBehaviour
 
 
         }
+        else
+        {
+            anim.SetBool("isRunning", false);
+            walkSpeed = 0;
+
+        }
 
     }
+
+    public void ToggleCanControl(bool value) {
+
+
+        canControl = value;
+        Debug.Log("canControl set as" + canControl);
+
+    
+
+    }
+
+
     public void Action()
     {
         Debug.Log("Action pressed");

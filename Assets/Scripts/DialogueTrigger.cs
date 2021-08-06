@@ -7,6 +7,7 @@ public class DialogueTrigger : MonoBehaviour
 
     [SerializeField] Dialogue dialogue;
     [SerializeField] GameObject dialogueTrigger;
+    Player refPlayer;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,6 +17,8 @@ public class DialogueTrigger : MonoBehaviour
         {
             TriggerDialogue();
             dialogueTrigger.SetActive(false);
+            refPlayer = collision.GetComponent<Player>();
+            refPlayer.ToggleCanControl(false);
         }
     }
 
@@ -23,9 +26,17 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
 
     }
+
+    public void DialogueEnded()
+    {
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        playerObj.GetComponent<Player>().ToggleCanControl(true);
+
+    }
+
+
 
 }

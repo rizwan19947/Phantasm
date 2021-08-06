@@ -73,3 +73,5 @@ MonoBehaviour:
   dialogue:
     sentences: []
   dialogueTrigger: {fileID: 8939914569738552199}
+  refPlayer: {fileID: 5032201130314595280, guid: f4851d988b2c2bc4396046908e3f3964,
+    type: 3}

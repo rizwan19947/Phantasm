@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e6ccf341819004e86efa515dbdd3c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueText: {fileID: 0}
+  animator: {fileID: 0}
+  refPlayer: {fileID: 5032201130314595280, guid: f4851d988b2c2bc4396046908e3f3964,
+    type: 3}

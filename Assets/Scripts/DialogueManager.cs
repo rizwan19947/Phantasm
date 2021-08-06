@@ -9,6 +9,8 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] Text dialogueText;
     [SerializeField] Animator animator;
+    [SerializeField] Player refPlayer;
+    DialogueTrigger dialogueTriggerRef = new DialogueTrigger();
 
     private Queue<string> sentences; 
 
@@ -21,6 +23,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+
+
         Debug.Log("Starting Conversation");
 
         animator.SetBool("IsOpen", true);
@@ -57,8 +61,12 @@ public class DialogueManager : MonoBehaviour
     
     private void EndDialogue()
     {
+
         animator.SetBool("IsOpen", false);
         Debug.Log("Conversation End");
+
+        dialogueTriggerRef.DialogueEnded();
+
     }
 
     IEnumerator TypeSentence (string sentence)
