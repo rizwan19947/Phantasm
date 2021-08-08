@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Player refPlayer;
     DialogueTrigger dialogueTriggerRef = new DialogueTrigger();
-
+    private bool dialogueManagerActive = false;
     private Queue<string> sentences; 
 
     void Start()
@@ -21,9 +21,17 @@ public class DialogueManager : MonoBehaviour
             
     }
 
+    private void Update()
+    {
+        if((dialogueManagerActive==true) && Input.GetKeyDown(KeyCode.Space)==true)
+        {
+            DisplayNextSentence();
+        }
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
-
+        dialogueManagerActive = true;
 
         Debug.Log("Starting Conversation");
 
@@ -61,7 +69,7 @@ public class DialogueManager : MonoBehaviour
     
     private void EndDialogue()
     {
-
+        dialogueManagerActive = false;
         animator.SetBool("IsOpen", false);
         Debug.Log("Conversation End");
 
