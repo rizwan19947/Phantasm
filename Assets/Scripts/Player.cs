@@ -106,7 +106,6 @@ public class Player : MonoBehaviour
         localScale = transform.localScale;
         checkPoint = transform.position;
         canControl = true;
-        
 
     }
 
@@ -150,7 +149,7 @@ public class Player : MonoBehaviour
             }
 
             //Stomping using keyboard
-            if((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && canStomp)
+            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && canStomp)
             {
                 ToggleStompMode(true);
             }
@@ -158,16 +157,15 @@ public class Player : MonoBehaviour
             ///////////////////////////////////////////OTHER DASH CODE////////////////////////////////////////////
 
             // Dashing Left
-            if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false) && (extraJumpsLeft > 0))
+            if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false) && (extraJumpsLeft > 0) && isDashing == false)
             {
                 StartCoroutine(Dash(-1f));
             }
 
             // Dashing Right
-            if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false) && (extraJumpsLeft > 0))
+            if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false) && (extraJumpsLeft > 0) && isDashing == false)
             {
                 StartCoroutine(Dash(1f));
-
 
             }
 
@@ -284,17 +282,16 @@ public class Player : MonoBehaviour
 
     IEnumerator Dash (float direction)
     {
-        Debug.Log("Dash Started");
         isDashing = true;
+        Debug.Log("Dash Started");
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(dashDistance * direction, 0f), ForceMode2D.Impulse);
         float gravity = rb.gravityScale;
         rb.gravityScale = 0;
         yield return new WaitForSeconds(0.4f);
-        isDashing = false;
+        isDashing = false; 
         rb.gravityScale = gravity;
         Debug.Log("Dash Ended");
-        yield return new WaitForSeconds(0.1f);
 
 
     }
