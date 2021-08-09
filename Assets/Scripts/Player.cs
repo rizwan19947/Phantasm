@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField] float dashDistance = 15f;
     [SerializeField] bool isDashing;
+    [SerializeField] float dashDelay = 0.2f;
 
 
 
@@ -157,15 +158,16 @@ public class Player : MonoBehaviour
             ///////////////////////////////////////////OTHER DASH CODE////////////////////////////////////////////
 
             // Dashing Left
-            if(Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false))
+            if(Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false) && (extraJumpsLeft > 0))
             {
                 StartCoroutine(Dash(-1f));
             }
 
             // Dashing Right
-            if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false))
+            if (Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false) && (extraJumpsLeft > 0))
             {
                 StartCoroutine(Dash(1f));
+
 
             }
 
@@ -292,6 +294,8 @@ public class Player : MonoBehaviour
         isDashing = false;
         rb.gravityScale = gravity;
         Debug.Log("Dash Ended");
+        yield return new WaitForSeconds(0.1f);
+
 
     }
 
