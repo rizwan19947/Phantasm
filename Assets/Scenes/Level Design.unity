@@ -40074,6 +40074,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 552314827}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: startDashTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 347815970070906115, guid: f4851d988b2c2bc4396046908e3f3964,
         type: 3}
       propertyPath: m_Size.x

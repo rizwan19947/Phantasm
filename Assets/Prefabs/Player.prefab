@@ -205,7 +205,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: fe4541766b76820429f38d751e6c1e66, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5032201130314595280
 MonoBehaviour:
@@ -227,6 +227,8 @@ MonoBehaviour:
   extraJumpsAllowed: 1
   stompModePermissionDuration: 0.5
   dust: {fileID: 0}
+  dashDistance: 15
+  isDashing: 0
   playerBlinkingTime: 0.2
   playerJumpOffEnemyForce: 9
   fadeAnimator: {fileID: 0}
@@ -249,7 +251,6 @@ MonoBehaviour:
   shakeMagnitude: 0
   fadeOut: 0
   checkPoint: {x: 0, y: 0, z: 0}
-  canControl: 1
 --- !u!212 &145847608
 SpriteRenderer:
   m_ObjectHideFlags: 0

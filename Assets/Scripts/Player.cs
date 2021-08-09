@@ -13,7 +13,11 @@ public class Player : MonoBehaviour
     [SerializeField] int extraJumpsAllowed;
     [SerializeField] float stompModePermissionDuration;
     [SerializeField] ParticleSystem dust;
-   
+    /// <summary>
+    /// Break
+    /// </summary>
+    [SerializeField] float dashDistance = 15f;
+    [SerializeField] bool isDashing;
 
 
 
@@ -65,7 +69,6 @@ public class Player : MonoBehaviour
     bool willDeflect= false;
     Rigidbody2D enemyProjectileRb= null;
 
-    
     bool canStomp = false;
     bool isStomping;
     bool swipedDown;
@@ -87,6 +90,10 @@ public class Player : MonoBehaviour
     }
 
 
+ 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,6 +112,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
+
+
+
+
+
+
+
 
 
         if (canControl==true ) {
@@ -137,7 +153,26 @@ public class Player : MonoBehaviour
             {
                 ToggleStompMode(true);
             }
-        
+
+            ///////////////////////////////////////////OTHER DASH CODE////////////////////////////////////////////
+
+            // Dashing Left
+            if(Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false))
+            {
+                StartCoroutine(Dash(-1f));
+            }
+
+            // Dashing Right
+            if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.X) && (isStomping == false))
+            {
+                StartCoroutine(Dash(1f));
+
+            }
+
+
+
+
+            ///////////////////////////////////////////OTHER DASH CODE////////////////////////////////////////////
 
 
 
@@ -167,6 +202,96 @@ public class Player : MonoBehaviour
             walkSpeed = 0;
 
         }
+
+
+
+
+
+
+        /*/////////////////////////DASH CODE///////////////////////////////////
+        if (direction == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                direction = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                direction = 2;
+            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                direction = 3;
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                direction = 4;
+            }
+
+        }
+        else
+        {
+            if (dashTime <= 0)
+            {
+                direction = 0;
+                dashTime = startDashTime;
+                rb.velocity = Vector2.zero;
+            }
+            else
+            {
+                dashTime -= Time.deltaTime;
+
+                if ((direction == 1) && Input.GetKeyDown(KeyCode.X))
+                {
+                    rb.velocity = Vector2.left * dashSpeed;
+
+                }
+                else if ((direction == 2) && Input.GetKeyDown(KeyCode.X))
+                {
+                    rb.velocity = Vector2.right * dashSpeed;
+
+                }
+                else if ((direction == 3) && Input.GetKeyDown(KeyCode.X))
+                {
+                    rb.velocity = Vector2.up * dashSpeed;
+
+                }
+                else if ((direction == 4) && Input.GetKeyDown(KeyCode.X))
+                {
+                    rb.velocity = Vector2.down * dashSpeed;
+
+                }
+            }
+        }
+
+        /////////////////////////DASH CODE///////////////////////////////////*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    IEnumerator Dash (float direction)
+    {
+        Debug.Log("Dash Started");
+        isDashing = true;
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
+        rb.AddForce(new Vector2(dashDistance * direction, 0f), ForceMode2D.Impulse);
+        float gravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        yield return new WaitForSeconds(0.4f);
+        isDashing = false;
+        rb.gravityScale = gravity;
+        Debug.Log("Dash Ended");
 
     }
 
@@ -205,20 +330,25 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsJumpable);
 
-        Walk();
-
-        //jump using keyboard
-        if (jump)
+        if (!isDashing)
         {
-            Jump();
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsJumpable);
+
+            Walk();
+
+            //jump using keyboard
+            if (jump)
+            {
+                Jump();
+            }
+
+
+
+            QuickFall();
         }
         
         
-        
-        QuickFall();
     }
 
     private void QuickFall()
